@@ -12,7 +12,7 @@ const thoughtSchema = new Schema(
     },
     createdAt: {
       type: Date,
-      default: Date.now,
+      default: Date.now(getDate),
     },
     username: {
       type: String,
@@ -28,20 +28,21 @@ const thoughtSchema = new Schema(
   {
     toJSON: {
       virtuals: true,
+      getters: true
     },
     id: false,
   }
 );
 
-// Create a virtual property `getTags` that gets the amount of tags associated with an application
+
 thoughtSchema
   .virtual('getReactions')
   // Getter
   .get(function () {
-    return this.tags.length;
+    return this.reaction.length;
   });
 
-// Initialize our Application model
+
 const Thought = model('thoughts', thoughtSchema);
 
 module.exports = Thought;
