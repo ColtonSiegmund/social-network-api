@@ -42,6 +42,27 @@ thoughtSchema
     return this.reaction.length;
   });
 
+  const reactionSchema = new Schema(
+    {
+      reactionId: {
+        ObjectId
+      },
+      reactionBody: {
+        type: String,
+        required: true,
+        maxlength: 280
+      },
+      username: {
+        type: String,
+        required: true
+      },
+      createdAt: {
+        type: Date,
+        default: Date.now(getDate),
+      }
+    }
+  )
+
 
 const Thought = model('thoughts', thoughtSchema);
 
