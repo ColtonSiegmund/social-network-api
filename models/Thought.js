@@ -1,33 +1,29 @@
 const { Schema, model } = require('mongoose');
-const User = require('./User');
+const reactionSchema = require('./Reaction');
+// import formatdate function
 
-// Schema to create Post model
+
 const thoughtSchema = new Schema(
   {
     thoughtText: {
       type: String,
-      required: true,
+      required: 'Must have input to create a thought',
       minlength: 1,
       maxlength: 280
     },
     createdAt: {
       type: Date,
-      default: Date.now(getDate),
+      default: Date.now,
+      get: getDate => formatDate(getDate)
     },
     username: {
       type: String,
       required: true,
     },
-    reactions: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'reaction'
-      }
-    ]
+    reactions: [reactionSchema]
   },
   {
     toJSON: {
-      virtuals: true,
       getters: true
     },
     id: false,
@@ -35,35 +31,12 @@ const thoughtSchema = new Schema(
 );
 
 
-thoughtSchema
-  .virtual('getReactions')
-  // Getter
-  .get(function () {
-    return this.reaction.length;
+thoughtSchema.virtual('getReactions').get(function () {
+    return this.reactions.length;
   });
 
-  const reactionSchema = new Schema(
-    {
-      reactionId: {
-        ObjectId
-      },
-      reactionBody: {
-        type: String,
-        required: true,
-        maxlength: 280
-      },
-      username: {
-        type: String,
-        required: true
-      },
-      createdAt: {
-        type: Date,
-        default: Date.now(getDate),
-      }
-    }
-  )
 
 
-const Thought = model('thoughts', thoughtSchema);
+const Thought = model('Thought', thoughtSchema);
 
 module.exports = Thought;
