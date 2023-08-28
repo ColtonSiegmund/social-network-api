@@ -34,7 +34,7 @@ async createThought(req,res) {
     const newThought = await Thought.create(req.body)
     .then(({ _id }) => {
       return User.findOneAndUpdate(
-        { _id: req.body.userId },
+        { username: req.body.username },
         { $push: { thoughts: _id } },
         { new: true }
       );
@@ -64,7 +64,7 @@ async deleteThought(req, res) {
 async updateThought(req, res) {
   try {
     const thought = await Thought.findOneAndUpdate (
-      {_id: req.params.thoughId},
+      {_id: req.params.thoughtId},
       {$set: req.body},
       {runValidators: true, new: true}
       );
@@ -82,15 +82,15 @@ async updateThought(req, res) {
 async addReaction (req, res) {
   try {
     const reaction = await Thought.findOneAndUpdate(
-      {_id: req.params.userId},
+      {_id: req.params.thoughtId},
       {$addToSet: {reactions: req.body}},
       {runValidators: true, new: true}
       );
       if (!reaction) {
         return res.status(404)
-        .json({message: "No thought friend with that ID"})
+        .json({message: "No thought with that ID"})
       }
-      res.json(friend);
+      res.json(reaction);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -100,11 +100,11 @@ async deleteReaction (req, res) {
   try {
     const reaction = await Thought.findOneAndUpdate(
       {_id: req.params.thoughtId},
-      {$pull: {reactions: { reactionId: req.params.friendId}}},
+      {$pull: {reactions: { reactionId: req.params.reactionId}}},
       {runValidators: true, new: true}
     );
     if (!reaction) {
-      return res.status(404).jsaon({message: 'No thought found that that ID'});
+      return res.status(404).json({message: 'No thought found that that ID'});
     }
     res.json(reaction);
   } catch (err) {

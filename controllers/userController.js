@@ -1,4 +1,4 @@
-const { ObjectId } = require('mongoose').Types;
+const { Schema, Types } = require('mongoose');
 const { Thought, User } = require('../models');
 
 module.exports = {
@@ -74,12 +74,12 @@ async addFriend (req, res) {
   try {
     const friend = await User.findOneAndUpdate(
       {_id: req.params.userId},
-      {$addToSet: {friends: req.body}},
+      {$addToSet: {friends: req.params.friendId}},
       {runValidators: true, new: true}
       );
-      if (!user) {
+      if (!friend) {
         return res.status(404)
-        .json({message: "No User friend with that ID"})
+        .json({message: "No friend with that ID"})
       }
       res.json(friend);
   } catch (err) {
@@ -91,11 +91,11 @@ async deleteFriend (req, res) {
   try {
     const friend = await User.findOneAndUpdate(
       {_id: req.params.userId},
-      {$pull: {friends: { friendId: req.params.friendId}}},
+      {$pull: {friends: req.params.friendId}},
       {runValidators: true, new: true}
     );
     if (!friend) {
-      return res.status(404).jsaon({message: 'No user fround that that ID'});
+      return res.status(404).json({message: 'No user fround that that ID'});
     }
     res.json(friend);
   } catch (err) {
