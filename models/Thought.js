@@ -31,9 +31,11 @@ const thoughtSchema = new Schema(
 );
 
 
-thoughtSchema.virtual('getReactions').get(function () {
+thoughtSchema.virtual('reactionCount').get(function () {
     return this.reactions.length;
   });
+
+  thoughtSchema.set('toJSON', { virtuals: true });
 
 
 
