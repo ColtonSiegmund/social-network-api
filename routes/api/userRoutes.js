@@ -4,20 +4,19 @@ const {
   getSingleUser,
   createUser,
   deleteUser,
-  addAssignment,
-  removeAssignment,
+  updateUser,
+  addFriend,
+  deleteFriend
 } = require('../../controllers/userController');
 
 
 router.route('/').get(getUsers).post(createUser);
 
 
-router.route('/:userId').get(getSingleUser).delete(deleteUser);
+router.route('/:userId').get(getSingleUser).delete(deleteUser).put(updateUser);
 
 
-router.route('/:userId/thoughts').post(addAssignment);
+router.route('/:userId/friends/:friendId').post(addFriend).delete(deleteFriend);
 
-
-router.route('/:userId/thoughts/:thoughtId').delete(removeAssignment);
 
 module.exports = router;
