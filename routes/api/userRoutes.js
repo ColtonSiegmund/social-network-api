@@ -1,3 +1,4 @@
+// requiring the router and all of the functions for each route
 const router = require('express').Router();
 const {
   getUsers,

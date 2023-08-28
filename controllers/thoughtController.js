@@ -1,8 +1,10 @@
+// importing mongoose and our models
 const { ObjectId } = require('mongoose').Types;
 const { Thought, User } = require('../models');
 
 module.exports = {
 
+// our get route for thoughts
 async getThought(req, res) {
   try {
     const thoughts = await Thought.find();
@@ -13,6 +15,7 @@ async getThought(req, res) {
   }
 },
 
+// our route to get a single thought
 async getSingleThought(req, res) {
   try {
     const singleThought = await Thought.findOne({_id: req.params.thoughtId})
@@ -29,6 +32,7 @@ async getSingleThought(req, res) {
   }
 },
 
+// route to create a thought
 async createThought(req,res) {
   try {
     const newThought = await Thought.create(req.body)
@@ -47,6 +51,7 @@ async createThought(req,res) {
   }
 },
 
+// route to delete a thought
 async deleteThought(req, res) {
   try {
     const thought = await Thought.findOneAndRemove({_id: req.params.thoughtId});
@@ -61,6 +66,7 @@ async deleteThought(req, res) {
   }
 },
 
+// route to update a thought
 async updateThought(req, res) {
   try {
     const thought = await Thought.findOneAndUpdate (
@@ -79,6 +85,7 @@ async updateThought(req, res) {
   }
 },
 
+// route to add a reaction to a thought
 async addReaction (req, res) {
   try {
     const reaction = await Thought.findOneAndUpdate(
@@ -96,6 +103,7 @@ async addReaction (req, res) {
   }
 },
 
+// route to delete a reaction from a thought
 async deleteReaction (req, res) {
   try {
     const reaction = await Thought.findOneAndUpdate(

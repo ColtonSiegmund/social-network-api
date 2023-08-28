@@ -1,3 +1,4 @@
+// requiring the router and all of the functions for each route
 const router = require('express').Router();
 const {
 getThought,
@@ -8,7 +9,6 @@ updateThought,
 addReaction,
 deleteReaction
 } = require('../../controllers/thoughtController');
-
 
 router.route('/').get(getThought).post(createThought);
 

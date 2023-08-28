@@ -1,8 +1,10 @@
+// importing mongoose and our models
 const { Schema, Types } = require('mongoose');
 const { Thought, User } = require('../models');
 
 module.exports = {
 
+  // route to get all users
 async getUsers(req, res) {
   try {
     const users = await User.find();
@@ -13,6 +15,7 @@ async getUsers(req, res) {
   }
 },
 
+// route to get a single user
 async getSingleUser(req, res) {
   try {
     const singleUser = await User.findOne({_id: req.params.userId})
@@ -29,6 +32,7 @@ async getSingleUser(req, res) {
   }
 },
 
+// route to create a user
 async createUser(req,res) {
   try {
     const newUser = await User.create(req.body);
@@ -39,6 +43,7 @@ async createUser(req,res) {
   }
 },
 
+// route to delete a user
 async deleteUser(req, res) {
   try {
     const user = await User.findOneAndRemove({_id: req.params.userId});
@@ -53,6 +58,7 @@ async deleteUser(req, res) {
   }
 },
 
+// route to update a user
 async updateUser (req, res) {
   try {
     const user = await User.findOneAndUpdate(
@@ -70,6 +76,7 @@ async updateUser (req, res) {
   }
 },
 
+// route to add a friend
 async addFriend (req, res) {
   try {
     const friend = await User.findOneAndUpdate(
@@ -87,6 +94,7 @@ async addFriend (req, res) {
   }
 },
 
+// route to remove a friend
 async deleteFriend (req, res) {
   try {
     const friend = await User.findOneAndUpdate(
