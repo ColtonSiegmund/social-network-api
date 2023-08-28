@@ -16,13 +16,13 @@
 
   ## Examples
 
-  [CLICK HERE](https://opensource.org/license/mit/) to watch a walkthrough of the application.  
+  [CLICK HERE](https://drive.google.com/file/d/13SXce6By0may-cqXqZlisS-YZjJpbIub/view?usp=sharing) to watch a walkthrough of the application.  
   
   ![Screenshot 1](./assets/Screenshot%202023-08-28%20at%2012.20.17%20PM.png)
   ![Screenshot 2](./assets/Screenshot%202023-08-28%20at%2012.20.35%20PM.png)
 
   ## Installation
-  1. Navitage to the repository at the link above. 
+  1. Navitage to the repository here: [GitHub Repo](https://github.com/ColtonSiegmund/social-network-api). 
   2. Click on the "code" button and copy the SSH URL 
   3. Open your command line and type `git clone <copied link>` and hit enter  
   4. type `code .` to open the repo in your preffered coding software  
