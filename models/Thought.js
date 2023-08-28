@@ -22,6 +22,13 @@ const reactionSchema = new Schema(
       default: Date.now,
       get: (createdAtVal) => moment(createdAtVal).format('MMM DD, YYYY [at] hh:mm a')
     }
+  },
+  {
+    toJSON: {
+      getters: true,
+      virtuals: true
+    },
+    id: false,
   }
 );
 
@@ -53,18 +60,10 @@ const thoughtSchema = new Schema(
   }
 );
 
-
-
 thoughtSchema.virtual('reactionCount')
 .get(function() {
     return this.reactions.length;
 })
-
-// thoughtSchema.virtual('reactionCount').get(function () {
-//     return this.reactions.length;
-//   });
-
-//   thoughtSchema.set('toJSON', { virtuals: true });
 
 
 
